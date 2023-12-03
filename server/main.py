@@ -4,6 +4,7 @@ from fastapi import FastAPI, Form
 from starlette.requests import Request
 import slackSender
 import scheduler
+import member_repository
 
 signiture = "HOW DARE YOU STEAL THAT CAR! I AM ABSOLUTELY DISGUSTED! YOUR FATHER'S IS NOW FACING AN INQUIRY AT WORK, AND IT'S ENTIRELY YOUR FAULT! IF YOU PUT ANOTHER TOE OUT OF LINE, WE'LL BRING YOU STRAIGHT HOME!: \n" \
              "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
@@ -42,6 +43,18 @@ async def say_anything(
 @app.post("/hey")
 def health():
     return "hi"
+
+
+@app.post("/{target_username}")
+def insert_user(target_username: str):
+    last_line = member_repository.insert_user(target_username)
+    return {last_line}
+
+
+@app.put("/{target_username}")
+def update_score(target_username):
+    new_score = member_repository.update_score(target_username)
+    return {new_score}
 
 
 def howl():
