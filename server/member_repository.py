@@ -2,6 +2,19 @@ from datetime import datetime
 
 file_path = "member.txt"
 date_format = '%Y/%m/%d/%H:%M:%S'
+username_index = 1
+score_index = 3
+
+
+def get_score():
+    scoreboards = []
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            line_data = line.split()
+            scoreboards.append(line_data[username_index] + " " + line_data[score_index])
+
+    return ', '.join(scoreboards)
 
 
 def update_score(target_username):

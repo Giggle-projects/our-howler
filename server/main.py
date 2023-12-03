@@ -45,6 +45,12 @@ def health():
     return "hi"
 
 
+@app.get("/score")
+def get_score():
+    members_score = member_repository.get_score()
+    return {members_score}
+
+
 @app.post("/update/{target_username}")
 def update_score(target_username):
     new_score = member_repository.update_score(target_username)
