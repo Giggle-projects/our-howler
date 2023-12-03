@@ -4,7 +4,7 @@ logging.basicConfig(level=logging.DEBUG)
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-client = WebClient(token="xoxb-2476610625797-6307304308496-J1g9DaDt3bT7xsJ06ZNWhKpN")
+client = WebClient(token="xoxb-2476610625797-6307304308496-zxqnhlXdCLF90D9PwOUR3chk")
 
 def send(channel, text):
     try:
