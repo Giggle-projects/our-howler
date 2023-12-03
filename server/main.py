@@ -9,10 +9,6 @@ import member_repository
 signiture = "HOW DARE YOU STEAL THAT CAR! I AM ABSOLUTELY DISGUSTED! YOUR FATHER'S IS NOW FACING AN INQUIRY AT WORK, AND IT'S ENTIRELY YOUR FAULT! IF YOU PUT ANOTHER TOE OUT OF LINE, WE'LL BRING YOU STRAIGHT HOME!: \n" \
              "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
 
-
-ygSlackId = "U067TDGK3PZ"
-jhSlackId = "U02DWRS37FY"
-
 app = FastAPI()
 
 
