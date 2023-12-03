@@ -45,13 +45,13 @@ def health():
     return "hi"
 
 
-@app.post("/{target_username}")
+@app.post("/insert/{target_username}")
 def insert_user(target_username: str):
     last_line = member_repository.insert_user(target_username)
     return {last_line}
 
 
-@app.put("/{target_username}")
+@app.post("/update/{target_username}")
 def update_score(target_username):
     new_score = member_repository.update_score(target_username)
     return {new_score}
