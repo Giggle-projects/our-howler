@@ -19,7 +19,7 @@ docker run -d -p 7777:7777 howler
 
 ## Why fastapi
 
-for fun
+no reason, just for fun 🤪 🤓 🥸
 
 ![KakaoTalk_Photo_2023-12-03-05-08-46](https://github.com/Giggle-projects/our-howler/assets/46060746/3c819f79-8583-4fe8-ad15-b582a77955a0)
 
