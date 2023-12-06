@@ -21,23 +21,8 @@ async def say_anything(
         request: Request
 ):
     form = await request.form()
-
-    # These are from slack slash command request
-    # This request contains a data payload describing the source command and who invoked it.
-
-    token = form["token"]
-    team_id = form["team_id"]
-    team_domain = form["team_domain"]
-    channel_id = form["channel_id"]
-    channel_name = form["channel_name"]
     user_id = form["user_id"]
-    user_name = form["user_name"]
-    command = form["command"]
-    text = form["text"]
-    response_url = form["response_url"]
-    trigger_id = form["trigger_id"]
-    api_app_id = form["api_app_id"]
-    return "<@{}>".format(user_id) + signature
+    return "<@{}>".format(user_id) + signature + str(datetime.now())
 
 
 @app.post("/hey")
@@ -57,14 +42,6 @@ def update_score(target_username):
     return {new_score}
 
 
-@app.get("/test")
-def get_do_not_upload_users():
-    today_date = datetime.now().date()
-    users = member_dao.get_member_slack_ids_by_not_exists_update_date(today_date)
-    test = ', '.join(users)
-    return {test}
-
-
 def howl():
     today_date = datetime.now().date()
     users = member_dao.get_member_slack_ids_by_not_exists_update_date(today_date)
@@ -75,6 +52,6 @@ def howl():
 
 
 if __name__ == "__main__":
-    scheduler.addScheduleEveryday("01:22", howl)
+    scheduler.addScheduleEveryday("01:29", howl)
     scheduler.runScheduler(5)
     uvicorn.run(app, host="0.0.0.0", port=7777)
