@@ -9,5 +9,3 @@ def init():
             line_data = line.split("=")
             env_map[line_data[0]] = line_data[1]
     return env_map
-
-
