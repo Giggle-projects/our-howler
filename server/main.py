@@ -1,10 +1,11 @@
 import uvicorn
 from fastapi import FastAPI, Form
+from datetime import datetime
 
 from starlette.requests import Request
 import slackSender
 import scheduler
-import member_repository
+import member_dao
 
 signiture = "HOW DARE YOU STEAL THAT CAR! I AM ABSOLUTELY DISGUSTED! YOUR FATHER'S IS NOW FACING AN INQUIRY AT WORK, AND IT'S ENTIRELY YOUR FAULT! IF YOU PUT ANOTHER TOE OUT OF LINE, WE'LL BRING YOU STRAIGHT HOME!: \n" \
              "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
@@ -49,13 +50,14 @@ def get_score():
 
 @app.post("/update/{target_username}")
 def update_score(target_username):
-    new_score = member_repository.update_score(target_username)
+    new_score = member_dao.update_score(target_username)
     return {new_score}
 
 
 @app.get("/test")
 def get_do_not_upload_users():
-    users = member_repository.get_today_do_not_upload_users()
+    today_date = datetime.now().date()
+    users = member_dao.get_member_slack_ids_by_not_exists_update_date(today_date)
     test = ', '.join(users)
     return {test}
 

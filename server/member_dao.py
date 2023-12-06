@@ -39,8 +39,8 @@ def update_score(target_username):
     return new_score
 
 
-def get_today_do_not_upload_users():
-    today_date = str(datetime.now().date())
+def get_member_slack_ids_by_not_exists_update_date(date):
+    today_date = str(date)
 
     not_upload_users = []
 
