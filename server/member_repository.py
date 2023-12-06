@@ -1,7 +1,7 @@
 from datetime import datetime
 
 file_path = "member.txt"
-date_format = '%Y/%m/%d/%H:%M:%S'
+date_format = '%Y-%m-%d/%H:%M:%S'
 username_index = 1
 score_index = 3
 
