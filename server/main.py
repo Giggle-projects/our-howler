@@ -44,7 +44,7 @@ def health():
 
 @app.get("/score")
 def get_score():
-    members_score = member_repository.get_score()
+    members_score = member_dao.get_score()
     return {members_score}
 
 
