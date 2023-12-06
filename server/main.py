@@ -53,6 +53,13 @@ def update_score(target_username):
     return {new_score}
 
 
+@app.get("/test")
+def get_do_not_upload_users():
+    users = member_repository.get_today_do_not_upload_users()
+    test = ', '.join(users)
+    return {test}
+
+
 def howl():
     slackSender.send("howler-alert", signiture)
 
