@@ -1,15 +1,14 @@
-import uvicorn
-from fastapi import FastAPI, Form
 from datetime import datetime
-
+from fastapi import FastAPI
 from starlette.requests import Request
-import slackSender
-import scheduler
+
+import uvicorn
 import member_dao
+import scheduler
+import slack_sender
 
 signature = " 너 도태될꺼야? 공부해 이놈아!\n" \
             "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
-
 
 commit_signature = " 님이 커밋하셨습니다."
 
@@ -40,7 +39,7 @@ def update_score(target_username):
     slack_id, score = member_dao.update_score(target_username)
 
     howl_message = "<@{}>".format(slack_id) + commit_signature
-    slackSender.send(channel_name, token, howl_message)
+    slack_sender.send(channel_name, token, howl_message)
     return [slack_id, score]
 
 
@@ -50,10 +49,10 @@ def howl():
 
     for user in users:
         howl_message = "<@{}>".format(user) + signature
-        slackSender.send(channel_name, token, howl_message)
+        slack_sender.send(channel_name, token, howl_message)
 
 
 if __name__ == "__main__":
-    scheduler.addScheduleEveryday("23:59", howl)
-    scheduler.runScheduler(5)
+    scheduler.add_schedule_everyday("23:59", howl)
+    scheduler.run_scheduler(5)
     uvicorn.run(app, host="0.0.0.0", port=7777)
