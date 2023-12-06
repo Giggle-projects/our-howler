@@ -1,15 +1,15 @@
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 
 from slack_sdk import WebClient
 from slack_sdk.errors import SlackApiError
 
-client = WebClient(token="xoxb-2476610625797-6307304308496-zxqnhlXdCLF90D9PwOUR3chk")
 
-def send(channel, text):
+def send(channel, token, text):
     try:
-        response = client.chat_postMessage(
-            channel= channel,
+        response = WebClient(token=token).chat_postMessage(
+            channel=channel,
             blocks=[
                 {
                     "type": "section",

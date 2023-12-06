@@ -7,15 +7,18 @@ import slackSender
 import scheduler
 import member_dao
 
-signiture = "HOW DARE YOU STEAL THAT CAR! I AM ABSOLUTELY DISGUSTED! YOUR FATHER'S IS NOW FACING AN INQUIRY AT WORK, AND IT'S ENTIRELY YOUR FAULT! IF YOU PUT ANOTHER TOE OUT OF LINE, WE'LL BRING YOU STRAIGHT HOME!: \n" \
-             "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
+signature = " 너 도태될꺼야? 공부해 이놈아!\n" \
+            "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
+
+channel_name = "howler-alert"
+token = "xoxb-2476610625797-6307304308496-zxqnhlXdCLF90D9PwOUR3chk"
 
 app = FastAPI()
 
 
 @app.post("/")
 async def say_anything(
-    request: Request
+        request: Request
 ):
     form = await request.form()
 
@@ -34,7 +37,7 @@ async def say_anything(
     response_url = form["response_url"]
     trigger_id = form["trigger_id"]
     api_app_id = form["api_app_id"]
-    return "<@{}>".format(user_id) + signiture
+    return "<@{}>".format(user_id) + signature
 
 
 @app.post("/hey")
@@ -63,11 +66,15 @@ def get_do_not_upload_users():
 
 
 def howl():
-    slackSender.send("howler-alert", signiture)
+    today_date = datetime.now().date()
+    users = member_dao.get_member_slack_ids_by_not_exists_update_date(today_date)
+
+    for user in users:
+        howl_message = "<@{}>".format(user) + signature
+        slackSender.send(channel_name, token, howl_message)
 
 
 if __name__ == "__main__":
-    howl()
-    scheduler.addScheduleEveryday("23:59", howl)
-    scheduler.runScheduler(20)
+    scheduler.addScheduleEveryday("01:22", howl)
+    scheduler.runScheduler(5)
     uvicorn.run(app, host="0.0.0.0", port=7777)
