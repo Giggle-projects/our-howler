@@ -4,6 +4,7 @@ from starlette.requests import Request
 
 import uvicorn
 import member_dao
+import env_dao
 import scheduler
 import slack_sender
 
@@ -12,8 +13,9 @@ signature = " 너 도태될꺼야? 공부해 이놈아!\n" \
 
 commit_signature = " 님이 커밋하셨습니다."
 
-channel_name = "howler-alert"
-token = "xoxb-2476610625797-6307304308496-zxqnhlXdCLF90D9PwOUR3chk"
+envs = env_dao.init()
+channel_name = envs["fastapi.channel_name"]
+token =  envs["fastapi.slack.token"]
 
 app = FastAPI()
 
