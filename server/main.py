@@ -10,6 +10,9 @@ import member_dao
 signature = " 너 도태될꺼야? 공부해 이놈아!\n" \
             "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
 
+
+commit_signature = " 님이 커밋하셨습니다."
+
 channel_name = "howler-alert"
 token = "xoxb-2476610625797-6307304308496-zxqnhlXdCLF90D9PwOUR3chk"
 
@@ -25,21 +28,20 @@ async def say_anything(
     return "<@{}>".format(user_id) + signature + str(datetime.now())
 
 
-@app.post("/hey")
-def health():
-    return "hi"
-
-
-@app.get("/score")
+@app.post("/score")
 def get_score():
     members_score = member_dao.get_score()
-    return {members_score}
+    response = ', '.join(members_score)
+    return {response}
 
 
 @app.post("/update/{target_username}")
 def update_score(target_username):
-    new_score = member_dao.update_score(target_username)
-    return {new_score}
+    slack_id, score = member_dao.update_score(target_username)
+
+    howl_message = "<@{}>".format(slack_id) + commit_signature
+    slackSender.send(channel_name, token, howl_message)
+    return [slack_id, score]
 
 
 def howl():
@@ -52,6 +54,6 @@ def howl():
 
 
 if __name__ == "__main__":
-    scheduler.addScheduleEveryday("01:29", howl)
+    scheduler.addScheduleEveryday("23:59", howl)
     scheduler.runScheduler(5)
     uvicorn.run(app, host="0.0.0.0", port=7777)

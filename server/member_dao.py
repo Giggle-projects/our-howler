@@ -16,7 +16,7 @@ def get_score():
             line_data = line.split()
             scoreboards.append(line_data[username_index] + " " + line_data[score_index])
 
-    return ', '.join(scoreboards)
+    return scoreboards
 
 
 def update_score(target_username):
@@ -24,7 +24,6 @@ def update_score(target_username):
 
     with open(file_path, 'r') as file:
         lines = file.readlines()
-        print(lines)
 
     for i, line in enumerate(lines):
         db_id, username, slack_id, score, now_time = line.split()
@@ -36,7 +35,7 @@ def update_score(target_username):
         file.writelines(lines)
     file.close()
 
-    return new_score
+    return [slack_id, new_score]
 
 
 def get_member_slack_ids_by_not_exists_update_date(date):
