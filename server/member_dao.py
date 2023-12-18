@@ -30,6 +30,7 @@ def update_score(target_username):
         if username == target_username:
             new_score = str(int(score) + 1)
             lines[i] = f"{db_id} {username} {slack_id} {new_score} {now.strftime(date_format)}\n"
+            break
 
     with open(file_path, 'w') as file:
         file.writelines(lines)
