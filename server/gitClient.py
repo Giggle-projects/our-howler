@@ -1,6 +1,6 @@
 from git import Repo
 
-PATH_OF_GIT_REPO = '.git'
+PATH_OF_GIT_REPO = '/app/.git'
 
 def push(target_username):
     repo = Repo(PATH_OF_GIT_REPO)
