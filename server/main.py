@@ -7,7 +7,7 @@ import member_dao
 import env_dao
 import scheduler
 import slack_sender
-import git
+import gitClient
 
 signature = " 너 도태될꺼야? 공부해 이놈아!\n" \
             "*<https://github.com/Giggle-projects/our-howler|Github - our howler>*"
@@ -41,7 +41,7 @@ def get_score():
 def update_score(target_username):
     slack_id, score = member_dao.update_score(target_username)
 
-    git.push(target_username)
+    gitClient.push(target_username)
 
     howl_message = "<@{}>".format(slack_id) + commit_signature
     slack_sender.send(channel_name, token, howl_message)
