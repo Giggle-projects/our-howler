@@ -2,7 +2,7 @@ import os
 os.environ["GIT_PYTHON_REFRESH"] = "quiet"
 from git import Repo
 
-PATH_OF_GIT_REPO = '/home/ecsimsw/dev/our-howler/.git'
+PATH_OF_GIT_REPO = '/app/.git'
 
 def push(target_username):
     repo = Repo(PATH_OF_GIT_REPO)
