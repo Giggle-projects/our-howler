@@ -1,3 +1,5 @@
+import os
+os.environ["GIT_PYTHON_REFRESH"] = "quiet"
 from git import Repo
 
 PATH_OF_GIT_REPO = '/app/.git'
