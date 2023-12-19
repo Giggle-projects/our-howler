@@ -9,7 +9,7 @@ http://cloud.ecsimsw.com:7777
 
 ```
 docker build . -t howler
-docker run -v ./member.txt:/app/member.txt -p 7777:7777 howler
+docker run -d -v ./member.txt:/app/member.txt -p 7777:7777 howler
 ```
 
 ## Flow
